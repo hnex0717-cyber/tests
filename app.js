@@ -10,6 +10,45 @@ const chapterLabels = {
   '7': '7장 · SQL'
 };
 
+const choiceMarkers = '①②③④⑤⑥⑦⑧';
+
+function cleanQuestionText(text) {
+  return text
+    .replace(/\*\*/g, '')
+    .replace(/^\s*>\s?/gm, '')
+    .replace(/```(?:sql)?\s*/gi, '')
+    .replace(/```/g, '')
+    .trim();
+}
+
+function hydrateQuestions() {
+  questions.forEach(question => {
+    const firstChoice = question.text.search(/[①②③④⑤⑥⑦⑧]/);
+    if (!question.options.length && firstChoice >= 0) {
+      const prompt = question.text.slice(0, firstChoice);
+      const choices = question.text
+        .slice(firstChoice)
+        .split(new RegExp(`([${choiceMarkers}])`))
+        .reduce((options, part) => {
+          if (choiceMarkers.includes(part)) {
+            options.push('');
+          } else if (options.length) {
+            options[options.length - 1] += part;
+          }
+          return options;
+        }, [])
+        .map(option => cleanQuestionText(option).trim())
+        .filter(Boolean);
+
+      question.text = prompt;
+      question.options = choices;
+    }
+    question.text = cleanQuestionText(question.text);
+  });
+}
+
+hydrateQuestions();
+
 let state = {
   filter: '1',
   index: 0,
@@ -40,8 +79,7 @@ function visibleQuestions() {
 }
 
 function questionPrompt(text) {
-  const firstChoice = text.search(/[①②③④⑤⑥⑦⑧]/);
-  return firstChoice >= 0 ? text.slice(0, firstChoice).trim() : text;
+  return text.trim();
 }
 
 function render() {
