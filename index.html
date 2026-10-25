@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f8fc">
+  <title>DB 마스터 | 데이터베이스 문제 풀이</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="DB 마스터 홈">
+      <span class="brand-mark">DB</span>
+      <span><strong>DB 마스터</strong><small>데이터베이스 개론 문제 풀이</small></span>
+    </a>
+    <div class="top-actions">
+      <button class="icon-button" id="themeToggle" type="button" aria-label="테마 전환">☼</button>
+      <button class="outline-button" id="resetButton" type="button">현재 풀이 초기화</button>
+    </div>
+  </header>
+
+  <main class="shell">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">DATABASE FUNDAMENTALS</p>
+        <h1>개념을 풀고,<br><span>실력으로 쌓아보세요.</span></h1>
+        <p class="hero-copy">데이터베이스 개론 핵심 문제를 장별로 풀고, 바로 해설을 확인해 보세요.</p>
+      </div>
+      <div class="hero-illustration" aria-hidden="true">
+        <div class="cube cube-back"></div><div class="cube cube-front"></div>
+        <span class="spark spark-one">+</span><span class="spark spark-two">×</span>
+      </div>
+    </section>
+
+    <section class="stats-grid" aria-label="학습 통계">
+      <div class="stat-card"><span class="stat-icon purple">✓</span><div><strong id="solvedCount">0</strong><span>푼 문제</span></div></div>
+      <div class="stat-card"><span class="stat-icon orange">★</span><div><strong id="accuracy">0%</strong><span>정답률</span></div></div>
+      <div class="stat-card"><span class="stat-icon blue">↗</span><div><strong id="streak">0일</strong><span>연속 학습</span></div></div>
+      <div class="stat-card"><span class="stat-icon green">▣</span><div><strong id="bestScore">-</strong><span>최고 점수</span></div></div>
+    </section>
+
+    <div class="content-grid">
+      <section class="practice-panel">
+        <div class="section-heading">
+          <div><p class="eyebrow">PRACTICE ROOM</p><h2>문제 풀이</h2></div>
+          <span class="question-count" id="questionCount">20문제</span>
+        </div>
+        <p class="chapter-label">풀고 싶은 장을 선택하세요</p>
+        <div class="filter-row chapter-picker" role="group" aria-label="장별 문제 선택">
+          <button class="filter" data-chapter="all">전체</button>
+          <button class="filter" data-chapter="1">1장</button>
+          <button class="filter" data-chapter="2">2장</button>
+          <button class="filter" data-chapter="3">3장</button>
+          <button class="filter" data-chapter="4">4장</button>
+          <button class="filter" data-chapter="5">5장</button>
+          <button class="filter" data-chapter="6">6장</button>
+          <button class="filter" data-chapter="7">7장 SQL</button>
+        </div>
+        <div class="mode-row">
+          <label class="toggle-label"><input type="checkbox" id="randomToggle"><span class="toggle"></span> 랜덤 출제</label>
+          <button class="text-button" id="wrongOnlyButton" type="button">오답만 풀기 <span>›</span></button>
+        </div>
+
+        <article class="quiz-card" id="quizCard">
+          <div class="quiz-meta"><span class="chapter-pill" id="chapterPill">3장 · 데이터베이스 시스템</span><span id="progressText">1 / 20</span></div>
+          <div class="progress-track"><span id="progressBar"></span></div>
+          <p class="question-number" id="questionNumber">QUESTION 01</p>
+          <h3 id="questionText"></h3>
+          <div class="answers" id="answers"></div>
+          <div class="feedback" id="feedback" hidden></div>
+          <div class="quiz-footer">
+            <button class="secondary-button" id="prevButton" type="button">← 이전</button>
+            <button class="primary-button" id="nextButton" type="button">다음 문제 <span>→</span></button>
+          </div>
+        </article>
+      </section>
+
+      <aside class="sidebar">
+        <section class="side-card">
+          <div class="side-title"><h3>학습 현황</h3><span id="completionText">0%</span></div>
+          <div class="completion-track"><span id="completionBar"></span></div>
+          <p id="completionMessage">첫 문제를 풀어 학습을 시작해 보세요.</p>
+          <div class="mini-stats"><span><b id="correctCount">0</b> 정답</span><span><b id="wrongCount">0</b> 오답</span></div>
+        </section>
+        <section class="side-card quick-card">
+          <div class="side-title"><h3>빠른 학습</h3><span class="bolt">✦</span></div>
+          <button class="quick-action" id="startButton" type="button"><span class="quick-icon">▶</span><span><b>이 장 처음부터</b><small>선택한 장의 전체 문제 풀기</small></span><i>›</i></button>
+          <button class="quick-action" id="randomStartButton" type="button"><span class="quick-icon orange-bg">⤨</span><span><b>이 장 랜덤 도전</b><small>선택한 장의 순서 섞기</small></span><i>›</i></button>
+        </section>
+        <section class="side-card sources-card">
+          <div class="side-title"><h3>학습 자료</h3><span>↗</span></div>
+          <p>업로드한 장별 연습문제를 바탕으로 구성했습니다.</p>
+          <a href="./데이터베이스개론_3장_연습문제.md" target="_blank">원문 문제 자료 보기 <span>↗</span></a>
+        </section>
+      </aside>
+    </div>
+  </main>
+  <footer><span>DB 마스터</span> · 데이터베이스 개론 학습 도구</footer>
+  <script src="question-data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
